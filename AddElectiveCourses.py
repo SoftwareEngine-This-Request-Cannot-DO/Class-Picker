@@ -35,7 +35,7 @@ def write_curriculum(student_id, course_id):
     filename = student_id + ".json"
 
     try:
-        if (verify(student_id, course_id)):
+        if (verify(student_id, course_id) and not is_over_credit(student_id, course_id) and not is_same_course(student_id, course_id)):
             with open(filename, 'r') as f:
                 data = json.load(f)
 
@@ -52,6 +52,39 @@ def write_curriculum(student_id, course_id):
             return True
     except FileNotFoundError:
         print("ERROR: " + student_id +"檔案不存在")
+        return False
+
+def is_same_course(student_id, course_id):
+    filename = student_id + ".json"
+    curriculum = read_json_file(filename)
+
+    curriculum_ = []
+    for key, data in curriculum.items():
+        curriculum_.append(data["Course_ID"])
+
+    if course_id in curriculum_:
+        return True
+    else:
+        return False
+        
+
+# 是否超過學分
+def is_over_credit(student_id, course_id):
+    filename = student_id + ".json"
+    curriculum = read_json_file(filename)
+    course_info = read_json_file("Course.json")
+    course_credit = course_info[course_id]["Credit"]
+
+    student_credit = 0
+    for key, data in curriculum.items():
+        temp = search_course(data["Course_ID"])
+        credit = temp["Credit"]
+        student_credit += credit
+
+    max_credit = 10
+    if student_credit + course_credit > max_credit:
+        return True
+    else:
         return False
 
 # 核實是否衝堂
@@ -115,7 +148,7 @@ def generate_value(arr):
 # testing only
 course = read_json_file("Course.json")
 student_id = "F001"
-class_id = "B001"
+class_id = "A003"
 result = write_curriculum(student_id, class_id)
 if result:
     print("Success")

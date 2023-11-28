@@ -4,14 +4,17 @@
     "name": "\u7528\u6237\u4e00",
     "role": "Student",
     "id": "D1234567",
-    "credit": 13,
-    "classes": [
-      "A001",
-      "A002",
-      "A003",
-      "A004",
-      "A005"
-    ]
+    "credit": 10,
+    "classes": {
+      "normal": [
+        "A007"
+      ],
+      "required": [
+        "A001",
+        "A002",
+        "A003"
+      ]
+    }
   },
   "D1111111": {
     "password": "password2",
@@ -19,9 +22,13 @@
     "role": "Student",
     "id": "D1234567",
     "credit": 5,
-    "classes": [
-      "A001",
-      "A002"
-    ]
+    "classes": {
+      "normal": [],
+      "required": [
+        "A001",
+        "A002",
+        "A007"
+      ]
+    }
   }
 }

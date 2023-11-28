@@ -45,7 +45,7 @@ async def write_curriculum(student_id, course_id):
         if (not verify(student_id, course_id)):
             return [False, "衝堂"]
         
-        data[student_id]["classes"].append(course_id)
+        data[student_id]["classes"]["normal"].append(course_id)
         data[student_id]['credit'] += course_info[course_id]["Credit"]
         await write_json_file(filename, data)
 
@@ -68,7 +68,11 @@ def verify(student_id, course_id):
         return False
 
     my_time = []
-    for other_course_id in curriculum[student_id]["classes"]:
+    for other_course_id in curriculum[student_id]["classes"]["normal"]:
+        # Week, Class, Duration
+        my_time.append(course_info[other_course_id]["Time"])
+    
+    for other_course_id in curriculum[student_id]["classes"]["required"]:
         # Week, Class, Duration
         my_time.append(course_info[other_course_id]["Time"])
 

@@ -7,6 +7,7 @@ app = Flask(__name__)
 CORS(app)
 
 user, courses, time = {}, [], {}
+islogin = [False, ""]
 
 @app.route('/', methods=['GET'])
 def home():
@@ -40,6 +41,8 @@ def login():
 
     if user and user['password'] == password:
         # 登入成功，重定向到用戶頁面
+        global islogin
+        islogin = [True, username]
         return redirect(url_for('user_profile', username=username))
     else:
         # 登入失敗
@@ -68,7 +71,9 @@ def createTimeTable():
         
 @app.route('/user/<username>')
 def user_profile(username):
-    global user, courses, time
+    global user, courses, time, islogin
+    if not islogin[0] or islogin[1] != username:
+        return f"<script>alert('你想幹麻，滾開');history.back();</script>"
     
     time = createTimeTable()
     # 個別用戶資料頁面
@@ -190,6 +195,8 @@ def previous_page(username):
 
 @app.route('/logout')
 def logout():
+    global islogin
+    islogin = [False, ""]
     return redirect('/')
 
 if __name__ == "__main__":

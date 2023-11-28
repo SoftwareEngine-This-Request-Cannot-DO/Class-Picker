@@ -4,6 +4,9 @@
         "Credit"        :   3,
         "Total peopl"   :   60,
         "Remaining"     :   40,
+        "Place"         :   "資電 234",
+        "Teacher"       :   "王先生",
+        "Depart"        :   "資電學院",
         "Time"          :   {
             "Week"      :   3,
             "Class"     :   6,
@@ -16,6 +19,9 @@
         "Credit"        :   2,
         "Total peopl"   :   50,
         "Remaining"     :   11,
+        "Place"         :   "資電 311",
+        "Teacher"       :   "曾先生",
+        "Depart"        :   "資電學院",
         "Time"          :   {
             "Week"      :   2,
             "Class"     :   6,
@@ -28,6 +34,9 @@
         "Credit"        :   2,
         "Total peopl"   :   40,
         "Remaining"     :   1,
+        "Place"         :   "語文 106",
+        "Teacher"       :   "林小姐",
+        "Depart"        :   "文學院",
         "Time"          :   {
             "Week"      :   1,
             "Class"     :   5,
@@ -40,6 +49,9 @@
         "Credit"        :   3,
         "Total peopl"   :   12,
         "Remaining"     :   0,
+        "Place"         :   "資電 210",
+        "Teacher"       :   "陳先生",
+        "Depart"        :   "資電學院",
         "Time"          :   {
             "Week"      :   1,
             "Class"     :   1,
@@ -52,6 +64,9 @@
         "Credit"        :   3,
         "Total peopl"   :   30,
         "Remaining"     :   5,
+        "Place"         :   "語文 301",
+        "Teacher"       :   "羅小姐",
+        "Depart"        :   "資電學院",
         "Time"          :   {
             "Week"      :   3,
             "Class"     :   3,
@@ -64,6 +79,9 @@
         "Credit"        :   3,
         "Total peopl"   :   42,
         "Remaining"     :   7,
+        "Place"         :   "工學 210",
+        "Teacher"       :   "孫先生",
+        "Depart"        :   "資電學院",
         "Time"          :   {
             "Week"      :   3,
             "Class"     :   3,
@@ -75,6 +93,9 @@
         "Credit": 3,
         "Remaining": 2,
         "Total peopl": 30,
+        "Place"         :   "資電 103",
+        "Teacher"       :   "紀先生",
+        "Depart"        :   "資電學院",
         "Time":{
             "Week": 3,
             "Class": 2,

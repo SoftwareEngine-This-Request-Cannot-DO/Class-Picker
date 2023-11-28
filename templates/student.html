@@ -58,25 +58,29 @@
                     {% for course in courses %}
                         <tr>
                             
-                                <td>{{course['id']}}</td>
-                                <td>{{course['info']['Name']}}</td>
-                                <td>{{course['info']['Credit']}}</td>
-                                <td>{{course['info']['Time']['Week']}} 第{{course['info']['Time']['Class']}}-{{course['info']['Time']['Class']  + course['info']['Time']['Duration'] - 1}}節</td>
-                                <td>{{course['info']['Remaining']}} / {{course['info']['Total peopl']}}</td>
-                                {% if course['check'] %}
-                                    <td>
-                                        <form method="POST" action="/remove/{{ course['id'] }}">
-                                            <button type="submit" class="withdrawButton">退選</button>
-                                        </form>
-                                    </td>
-                                {% else %}
-                                    <td>
-                                        <form method="POST" action="/add/{{ course['id'] }}">
-                                            <button type="submit" class="withdrawButton">加選</button>
-                                        </form>
-                                    </td>
-                                {% endif %}
-                                <td><button class="withdrawButton">詳細資料</button></td>
+                            <td>{{course['id']}}</td>
+                            <td>{{course['info']['Name']}}</td>
+                            <td>{{course['info']['Credit']}}</td>
+                            <td>{{course['info']['Time']['Week']}} 第{{course['info']['Time']['Class']}}-{{course['info']['Time']['Class']  + course['info']['Time']['Duration'] - 1}}節</td>
+                            <td>{{course['info']['Remaining']}} / {{course['info']['Total peopl']}}</td>
+                            {% if course['check'] %}
+                                <td>
+                                    <form method="POST" action="/remove/{{ course['id'] }}">
+                                        <button type="submit" class="withdrawButton btn btn-warning">退選</button>
+                                    </form>
+                                </td>
+                            {% else %}
+                                <td>
+                                    <form method="POST" action="/add/{{ course['id'] }}">
+                                        <button type="submit" class="withdrawButton btn btn-success">加選</button>
+                                    </form>
+                                </td>
+                            {% endif %}
+                            <td>
+                                <form method="POST" action="/details/{{ course['id'] }}">
+                                    <button type="submit" class="withdrawButton btn btn-info">詳細資料</button>
+                                </form>
+                            </td> 
                         </tr>
                     {% endfor %}
                 </table>

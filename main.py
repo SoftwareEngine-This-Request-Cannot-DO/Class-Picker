@@ -151,6 +151,21 @@ async def removeClass(classid):
         return render_template('student.html', user=user, time=time, courses=courses)
     return res[1], 404
 
+@app.route('/details/<classid>', methods=['Post'])
+def details(classid):
+    with open("Course.json", encoding='utf-8') as f:
+        raw_courses = json.load(f)
+    course = raw_courses[classid]
+    class_ = {"name": course["Name"], "info": []}
+    class_["info"].append({ "key": "課程 ID", "value": classid })
+    class_["info"].append({ "key": "學分", "value": course["Credit"]})
+    class_["info"].append({ "key": "上課時間", "value": time["days"][course["Time"]["Week"] - 1] + " 第" + str(course["Time"]["Class"]) + "-" + str(course["Time"]["Class"] + course["Time"]["Duration"] - 1) + "節"})
+    class_["info"].append({ "key": "上課地點", "value": course["Place"]})
+    class_["info"].append({ "key": "指導教師", "value": course["Teacher"]})
+    class_["info"].append({ "key": "負責系辦", "value": course["Depart"]})
+    class_["info"].append({ "key": "剩餘名額 / 總共名額", "value": str(course["Remaining"]) + " / " + str(course["Total peopl"])})
+    return render_template("details.html", class_=class_)
+
 @app.route('/logout')
 def logout():
     return redirect('/')

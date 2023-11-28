@@ -22,6 +22,7 @@
             <button id="showButton1" onclick="showMyClass()" type="button" class="btn btn-outline-primary active">我的課程</button>
             <button id="showButton2" onclick="showOtherClass()" type="button" class="btn btn-outline-primary active">全部課程</button>
             <a href="{{ url_for('logout') }}" type="button" class="btn btn-outline-danger">登出</a>
+            <div><small style="color:red; font-weight: bold;">紅字為必修</small></div>
         </div>
         <div id="class-information">
             <div class="tableFragment">
@@ -61,7 +62,11 @@
                         <tr>
                             
                             <td>{{course['id']}}</td>
-                            <td>{{course['info']['Name']}}</td>
+                            {% if course['required'] %}
+                                <td style="color:red; font-weight: bold;">{{course['info']['Name']}}</td>
+                            {% else %}
+                                <td>{{course['info']['Name']}}</td>
+                            {% endif %}
                             <td>{{course['info']['Credit']}}</td>
                             <td>{{course['info']['Time']['Week']}} 第{{course['info']['Time']['Class']}}-{{course['info']['Time']['Class']  + course['info']['Time']['Duration'] - 1}}節</td>
                             <td>{{course['info']['Remaining']}} / {{course['info']['Total peopl']}}</td>

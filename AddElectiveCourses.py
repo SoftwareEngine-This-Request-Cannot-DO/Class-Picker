@@ -1,4 +1,3 @@
-import pandas as pd
 import json
 
 #讀入Json檔案
@@ -12,7 +11,7 @@ def read_json_file(filename):
         print("ERROR: 找不到 " + filename + " 檔案。")
         return None
 
-async def write_json_file(filename, new_data):
+def write_json_file(filename, new_data):
     try:
         with open(filename, 'w', encoding='utf-8') as f:
             json.dump(new_data, f, indent = 2)
@@ -31,7 +30,7 @@ def search_course(course_id):
     else:
         return None
 
-async def write_curriculum(student_id, course_id):
+def write_curriculum(student_id, course_id):
     filename = "student.json"
     data = read_json_file(filename)
     course_info = read_json_file("course.json")
@@ -52,8 +51,8 @@ async def write_curriculum(student_id, course_id):
         data[student_id]["classes"]["normal"].append(course_id)
         data[student_id]['credit'] += course_info[course_id]["Credit"]
         course_info[course_id]["Remaining"] -= 1
-        await write_json_file("student.json", data)
-        await write_json_file("course.json", course_info)
+        write_json_file("student.json", data)
+        write_json_file("course.json", course_info)
 
     except FileNotFoundError:
         print("ERROR: " + filename +"檔案不存在")

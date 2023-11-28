@@ -96,7 +96,12 @@ def user_profile(username):
     copy_courses = copy.deepcopy(raw_courses)
     for course_key, course_val in copy_courses.items():
         course_val["Time"]["Week"] = time["days"][course_val["Time"]["Week"] - 1] 
-        course_obj = {"id": course_key, "info": course_val, "check": course_key in user["classes"]["normal"] or course_key in user["classes"]["required"]}
+        course_obj = {
+            "id": course_key, 
+            "info": course_val, 
+            "check": course_key in user["classes"]["normal"] or course_key in user["classes"]["required"],
+            "required": course_key in user["classes"]["required"]
+        }
         courses.append(course_obj)
 
     if user:
@@ -105,17 +110,17 @@ def user_profile(username):
         return f"<script>alert('該用戶不存在');history.back();</script>"
     
 @app.route('/add/<classid>', methods=['POST'])
-async def addClass(classid):
+def addClass(classid):
     global user
-    res = await addCourses.write_curriculum(user['id'], classid)
+    res = addCourses.write_curriculum(user['id'], classid)
     if res[0]:         
         return redirect(url_for('user_profile', username=user['id']))
     return f"<script>alert('{res[1]}');history.back();</script>"
 
 @app.route('/remove/<classid>', methods=['POST'])
-async def removeClass(classid):
+def removeClass(classid):
     global user
-    res = await removeCourses.removeClass(user['id'], classid)
+    res = removeCourses.removeClass(user['id'], classid)
     if res[0]:
         return redirect(url_for('user_profile', username=user['id']))
     return f"<script>alert('{res[1]}');history.back();</script>"

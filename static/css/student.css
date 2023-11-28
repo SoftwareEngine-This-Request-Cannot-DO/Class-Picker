@@ -47,12 +47,13 @@ button{
 }
 
 
-
 table{
     margin-left: 20px;
     font-size: 12px;
     margin-top: 10px;
     display: none;
+    outline: 1px solid black;
+    outline-offset: 2px;
 }
 
 .tableFragment{

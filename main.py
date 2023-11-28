@@ -106,71 +106,21 @@ def user_profile(username):
     
 @app.route('/add/<classid>', methods=['POST'])
 async def addClass(classid):
-    global user, time, courses
+    global user
 
     # 增加 classid
     res = await addCourses.write_curriculum(user['id'], classid)
-    if res[0]: 
-        time = createTimeTable()
-        # 個別用戶資料頁面
-        with open("student.json", encoding='utf-8') as f:
-            user = json.load(f).get(user['id'])
-
-        with open("Course.json", encoding='utf-8') as f:
-            raw_courses = json.load(f)
-
-        for class_ in user["classes"]["normal"]:
-            class_time = raw_courses[class_]["Time"]
-            for i in range(class_time["Duration"]):
-                time["class"][int(class_time["Class"]) - 1 + i]["content"][int(class_time["Week"]) - 1] = raw_courses[class_]
-        
-        for class_ in user["classes"]["required"]:
-            class_time = raw_courses[class_]["Time"]
-            for i in range(class_time["Duration"]):
-                time["class"][int(class_time["Class"]) - 1 + i]["content"][int(class_time["Week"]) - 1] = raw_courses[class_]
-        
-        courses = []
-        copy_courses = copy.deepcopy(raw_courses)
-        for course_key, course_val in copy_courses.items():
-            course_val["Time"]["Week"] = time["days"][course_val["Time"]["Week"] - 1] 
-            course_obj = {"id": course_key, "info": course_val, "check": course_key in user["classes"]["normal"] or course_key in user["classes"]["required"]}
-            courses.append(course_obj)
-        
-        return render_template('student.html', user=user, time=time, courses=courses)
+    if res[0]:         
+        return redirect(url_for('user_profile', username=user['id']))
     return f"<script>alert('{res[1]}');history.back();</script>"
 
 @app.route('/remove/<classid>', methods=['POST'])
 async def removeClass(classid):
-    global user, courses, time
+    global user
     
     res = await removeCourses.removeClass(user['id'], classid)
     if res[0]:
-        time = createTimeTable()
-        # 個別用戶資料頁面
-        with open("student.json", encoding='utf-8') as f:
-            user = json.load(f).get(user['id'])
-
-        with open("Course.json", encoding='utf-8') as f:
-            raw_courses = json.load(f)
-
-        for class_ in user["classes"]["normal"]:
-            class_time = raw_courses[class_]["Time"]
-            for i in range(class_time["Duration"]):
-                time["class"][int(class_time["Class"]) - 1 + i]["content"][int(class_time["Week"]) - 1] = raw_courses[class_]
-        
-        for class_ in user["classes"]["required"]:
-            class_time = raw_courses[class_]["Time"]
-            for i in range(class_time["Duration"]):
-                time["class"][int(class_time["Class"]) - 1 + i]["content"][int(class_time["Week"]) - 1] = raw_courses[class_]
-        
-        courses = []
-        copy_courses = copy.deepcopy(raw_courses)
-        for course_key, course_val in copy_courses.items():
-            course_val["Time"]["Week"] = time["days"][course_val["Time"]["Week"] - 1] 
-            course_obj = {"id": course_key, "info": course_val, "check": course_key in user["classes"]["normal"] or course_key in user["classes"]["required"]}
-            courses.append(course_obj)
-        
-        return render_template('student.html', user=user, time=time, courses=courses)
+        return redirect(url_for('user_profile', username=user['id']))
     return f"<script>alert('{res[1]}');history.back();</script>"
 
 @app.route('/details/<classid>', methods=['Post'])

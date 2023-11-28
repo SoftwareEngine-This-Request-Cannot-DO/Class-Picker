@@ -1,105 +1,142 @@
 {
-    "A001" : {
-        "Name"          :   "軟體工程開發實務",
-        "Credit"        :   3,
-        "Total peopl"   :   60,
-        "Remaining"     :   40,
-        "Place"         :   "資電 234",
-        "Teacher"       :   "王先生",
-        "Depart"        :   "資電學院",
-        "Time"          :   {
-            "Week"      :   3,
-            "Class"     :   6,
-            "Duration"  :   3   
-        }
-    },
-
-    "A002" : {
-        "Name"          :   "程式設計(I)",
-        "Credit"        :   2,
-        "Total peopl"   :   50,
-        "Remaining"     :   11,
-        "Place"         :   "資電 311",
-        "Teacher"       :   "曾先生",
-        "Depart"        :   "資電學院",
-        "Time"          :   {
-            "Week"      :   2,
-            "Class"     :   6,
-            "Duration"  :   2   
-        }
-    },
-
-    "A003" : {
-        "Name"          :   "國語",
-        "Credit"        :   2,
-        "Total peopl"   :   40,
-        "Remaining"     :   1,
-        "Place"         :   "語文 106",
-        "Teacher"       :   "林小姐",
-        "Depart"        :   "文學院",
-        "Time"          :   {
-            "Week"      :   1,
-            "Class"     :   5,
-            "Duration"  :   2   
-        }
-    },
-
-    "A004" : {
-        "Name"          :   "程式設計(II)",
-        "Credit"        :   3,
-        "Total peopl"   :   12,
-        "Remaining"     :   0,
-        "Place"         :   "資電 210",
-        "Teacher"       :   "陳先生",
-        "Depart"        :   "資電學院",
-        "Time"          :   {
-            "Week"      :   1,
-            "Class"     :   1,
-            "Duration"  :   3   
-        }
-    },
-
-    "A005" : {
-        "Name"          :   "資料結構",
-        "Credit"        :   3,
-        "Total peopl"   :   30,
-        "Remaining"     :   5,
-        "Place"         :   "語文 301",
-        "Teacher"       :   "羅小姐",
-        "Depart"        :   "資電學院",
-        "Time"          :   {
-            "Week"      :   3,
-            "Class"     :   3,
-            "Duration"  :   3   
-        }
-    },
-
-    "A006" : {
-        "Name"          :   "軟體工程",
-        "Credit"        :   3,
-        "Total peopl"   :   42,
-        "Remaining"     :   7,
-        "Place"         :   "工學 210",
-        "Teacher"       :   "孫先生",
-        "Depart"        :   "資電學院",
-        "Time"          :   {
-            "Week"      :   3,
-            "Class"     :   3,
-            "Duration"  :   2   
-        }
-    },
-    "A007" : {
-        "Name": "演算法",
-        "Credit": 3,
-        "Remaining": 2,
-        "Total peopl": 30,
-        "Place"         :   "資電 103",
-        "Teacher"       :   "紀先生",
-        "Depart"        :   "資電學院",
-        "Time":{
-            "Week": 3,
-            "Class": 2,
-            "Duration": 3
-        }
+  "A001": {
+    "Name": "\u8edf\u9ad4\u5de5\u7a0b\u958b\u767c\u5be6\u52d9",
+    "Credit": 3,
+    "Total peopl": 60,
+    "Remaining": 40,
+    "Place": "\u8cc7\u96fb 234",
+    "Teacher": "\u738b\u5148\u751f",
+    "Depart": "\u8cc7\u96fb\u5b78\u9662",
+    "Time": {
+      "Week": 3,
+      "Class": 6,
+      "Duration": 3
     }
+  },
+  "A002": {
+    "Name": "\u7a0b\u5f0f\u8a2d\u8a08(I)",
+    "Credit": 2,
+    "Total peopl": 50,
+    "Remaining": 11,
+    "Place": "\u8cc7\u96fb 311",
+    "Teacher": "\u66fe\u5148\u751f",
+    "Depart": "\u8cc7\u96fb\u5b78\u9662",
+    "Time": {
+      "Week": 2,
+      "Class": 6,
+      "Duration": 2
+    }
+  },
+  "A003": {
+    "Name": "\u570b\u8a9e",
+    "Credit": 2,
+    "Total peopl": 40,
+    "Remaining": 1,
+    "Place": "\u8a9e\u6587 106",
+    "Teacher": "\u6797\u5c0f\u59d0",
+    "Depart": "\u6587\u5b78\u9662",
+    "Time": {
+      "Week": 1,
+      "Class": 5,
+      "Duration": 2
+    }
+  },
+  "A004": {
+    "Name": "\u7a0b\u5f0f\u8a2d\u8a08(II)",
+    "Credit": 3,
+    "Total peopl": 12,
+    "Remaining": 0,
+    "Place": "\u8cc7\u96fb 210",
+    "Teacher": "\u9673\u5148\u751f",
+    "Depart": "\u8cc7\u96fb\u5b78\u9662",
+    "Time": {
+      "Week": 1,
+      "Class": 1,
+      "Duration": 3
+    }
+  },
+  "A005": {
+    "Name": "\u8cc7\u6599\u7d50\u69cb",
+    "Credit": 3,
+    "Total peopl": 30,
+    "Remaining": 3,
+    "Place": "\u8a9e\u6587 301",
+    "Teacher": "\u7f85\u5c0f\u59d0",
+    "Depart": "\u8cc7\u96fb\u5b78\u9662",
+    "Time": {
+      "Week": 3,
+      "Class": 3,
+      "Duration": 3
+    }
+  },
+  "A006": {
+    "Name": "\u8edf\u9ad4\u5de5\u7a0b",
+    "Credit": 3,
+    "Total peopl": 42,
+    "Remaining": 8,
+    "Place": "\u5de5\u5b78 210",
+    "Teacher": "\u5b6b\u5148\u751f",
+    "Depart": "\u8cc7\u96fb\u5b78\u9662",
+    "Time": {
+      "Week": 3,
+      "Class": 3,
+      "Duration": 2
+    }
+  },
+  "A007": {
+    "Name": "\u6f14\u7b97\u6cd5",
+    "Credit": 3,
+    "Remaining": 2,
+    "Total peopl": 30,
+    "Place": "\u8cc7\u96fb 103",
+    "Teacher": "\u7d00\u5148\u751f",
+    "Depart": "\u8cc7\u96fb\u5b78\u9662",
+    "Time": {
+      "Week": 3,
+      "Class": 2,
+      "Duration": 3
+    }
+  },
+  "A008": {
+    "Name": "\u6295\u8cc7\u5b78",
+    "Credit": 2,
+    "Remaining": 7,
+    "Total peopl": 40,
+    "Place": "\u5546\u5b78 103",
+    "Teacher": "\u9ec3\u5973\u58eb",
+    "Depart": "\u5546\u5b78\u9662",
+    "Time": {
+      "Week": 5,
+      "Class": 1,
+      "Duration": 2
+    }
+  },
+  "A009": {
+    "Name": "\u6d41\u9ad4\u529b\u5b78",
+    "Credit": 2,
+    "Remaining": 0,
+    "Total peopl": 30,
+    "Place": "\u822a\u592a 303",
+    "Teacher": "\u738b\u8001\u5e2b",
+    "Depart": "\u5de5\u7a0b\u5b78\u9662",
+    "Time": {
+      "Week": 1,
+      "Class": 8,
+      "Duration": 2
+    }
+  },
+  "A10": {
+    "Name": "\u5fae\u7a4d\u5206(I)",
+    "Credit": 3,
+    "Remaining": 10,
+    "Total peopl": 50,
+    "Place": "\u8a9e\u6587 102",
+    "Teacher": "\u9673\u8001\u5e2b",
+    "Depart": "\u5de5\u7a0b\u5b78\u9662",
+    "Time": {
+      "Week": 2,
+      "Class": 6,
+      "Duration": 3
+    }
+  }
 }

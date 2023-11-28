@@ -24,18 +24,20 @@ async def write_json_file(filename, new_data):
 
 async def removeClass(student_id, course_id):
     students_data = read_json_file("student.json")
-    course_data = read_json_file("Course.json")
+    course_data = read_json_file("course.json")
+
+    # 確認必修
+    if course_id in students_data[student_id]["classes"]["required"]:
+        return [False, "不能退必修"]
 
     # 確認學分
     if students_data[student_id]["credit"] - course_data[course_id]["Credit"] < 10:
         return [False, "低於學分下限"]
     
-    # 確認必修
-    if course_id in students_data[student_id]["classes"]["required"]:
-        return [False, "不能退必修"]
-    
     students_data[student_id]["credit"] -= course_data[course_id]["Credit"]
     students_data[student_id]["classes"]["normal"].remove(course_id)
+    course_data[course_id]["Remaining"] += 1
     await write_json_file("student.json", students_data)
+    await write_json_file("course.json", course_data)
     return [True]
     

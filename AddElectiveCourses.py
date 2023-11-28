@@ -25,7 +25,7 @@ async def write_json_file(filename, new_data):
         return FileExistsError
 
 def search_course(course_id):
-    course_info = read_json_file("Course.json")
+    course_info = read_json_file("course.json")
     if course_id in course_info:
         return course_info[course_id]
     else:
@@ -34,9 +34,13 @@ def search_course(course_id):
 async def write_curriculum(student_id, course_id):
     filename = "student.json"
     data = read_json_file(filename)
-    course_info = read_json_file("Course.json")
+    course_info = read_json_file("course.json")
 
     try:
+        # 確認剩餘人數
+        if course_info[course_id]["Remaining"] == 0:
+            return [False, "沒有剩餘名額"]
+
         # 確認學分
         if int(data[student_id]['credit']) + int(course_info[course_id]["Credit"]) > 30:  
             return [False, "超過學分上限"]
@@ -47,7 +51,9 @@ async def write_curriculum(student_id, course_id):
         
         data[student_id]["classes"]["normal"].append(course_id)
         data[student_id]['credit'] += course_info[course_id]["Credit"]
-        await write_json_file(filename, data)
+        course_info[course_id]["Remaining"] -= 1
+        await write_json_file("student.json", data)
+        await write_json_file("course.json", course_info)
 
     except FileNotFoundError:
         print("ERROR: " + filename +"檔案不存在")
@@ -57,7 +63,7 @@ async def write_curriculum(student_id, course_id):
 def verify(student_id, course_id):
     filename = "student.json"
     curriculum = read_json_file(filename)
-    course_info = read_json_file("Course.json")
+    course_info = read_json_file("course.json")
 
     if curriculum is None:
         return False
@@ -106,7 +112,7 @@ def generate_value(time):
 
 # testing only
 if __name__ == '__main__':
-    course = read_json_file("Course.json")
+    course = read_json_file("course.json")
     student_id = "F001"
     class_id = "B001"
     result = write_curriculum(student_id, class_id)

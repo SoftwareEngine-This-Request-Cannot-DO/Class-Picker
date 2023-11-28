@@ -74,13 +74,13 @@ def user_profile(username):
     global user, courses, time, islogin
     if not islogin[0] or islogin[1] != username:
         return f"<script>alert('你想幹麻，滾開');history.back();</script>"
-    
+
     time = createTimeTable()
     # 個別用戶資料頁面
     with open("student.json", encoding='utf-8') as f:
         user = json.load(f).get(username)
 
-    with open("Course.json", encoding='utf-8') as f:
+    with open("course.json", encoding='utf-8') as f:
         raw_courses = json.load(f)
 
     for class_ in user["classes"]["normal"]:
@@ -107,8 +107,6 @@ def user_profile(username):
 @app.route('/add/<classid>', methods=['POST'])
 async def addClass(classid):
     global user
-
-    # 增加 classid
     res = await addCourses.write_curriculum(user['id'], classid)
     if res[0]:         
         return redirect(url_for('user_profile', username=user['id']))
@@ -117,7 +115,6 @@ async def addClass(classid):
 @app.route('/remove/<classid>', methods=['POST'])
 async def removeClass(classid):
     global user
-    
     res = await removeCourses.removeClass(user['id'], classid)
     if res[0]:
         return redirect(url_for('user_profile', username=user['id']))
@@ -125,7 +122,7 @@ async def removeClass(classid):
 
 @app.route('/details/<classid>', methods=['Post'])
 def details(classid):
-    with open("Course.json", encoding='utf-8') as f:
+    with open("course.json", encoding='utf-8') as f:
         raw_courses = json.load(f)
     course = raw_courses[classid]
     class_ = {"user": user['id'], "name": course["Name"], "info": []}
@@ -145,9 +142,12 @@ def previous_page(username):
 
 @app.route('/logout')
 def logout():
-    global islogin
+    global islogin, user, courses, time
     islogin = [False, ""]
+    user = {}
+    courses = []
+    time = {}
     return redirect('/')
 
 if __name__ == "__main__":
-    app.run("0.0.0.0", port=5000)
+    app.run("0.0.0.0", port=5000, debug=True)

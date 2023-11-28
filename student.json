@@ -4,11 +4,11 @@
     "name": "\u7528\u6237\u4e00",
     "role": "Student",
     "id": "D1234567",
-    "credit": 13,
+    "credit": 12,
     "classes": {
       "normal": [
-        "A006",
-        "A004"
+        "A008",
+        "A005"
       ],
       "required": [
         "A001",
@@ -21,10 +21,14 @@
     "password": "password2",
     "name": "\u7528\u6237\u4e8c",
     "role": "Student",
-    "id": "D1234567",
-    "credit": 5,
+    "id": "D1111111",
+    "credit": 12,
     "classes": {
-      "normal": [],
+      "normal": [
+        "A004",
+        "A008",
+        "A009"
+      ],
       "required": [
         "A001",
         "A002",

@@ -18,15 +18,32 @@ def login():
     # POST 請求用於表單繳交
     username = request.form['username']
     password = request.form['password']
+
+    # 檢查帳號是否輸入
+    if not username:
+        return f"<script>alert('請輸入帳號');history.back();</script>"
+
+    # 檢查密碼是否輸入
+    if not password:
+        return f"<script>alert('請輸入密碼');history.back();</script>"
+    
     with open("student.json", encoding='utf-8') as f:
         user = json.load(f).get(username)
+    
+    # 檢查是否有此帳號
+    if not user:
+        return f"<script>alert('帳號錯誤');history.back();</script>"
+    
+    # 檢查密碼是否正確
+    if user['password'] != password:
+        return f"<script>alert('密碼錯誤');history.back();</script>"
 
     if user and user['password'] == password:
         # 登入成功，重定向到用戶頁面
         return redirect(url_for('user_profile', username=username))
     else:
         # 登入失敗
-        return "登录失败"
+        return f"<script>alert('登入失敗');history.back();</script>"
 
 def createTimeTable():
     global time
@@ -80,7 +97,7 @@ def user_profile(username):
     if user:
         return render_template('student.html', user=user, time=time, courses=courses)
     else:
-        return '用户不存在', 404
+        return f"<script>alert('該用戶不存在');history.back();</script>"
     
 @app.route('/add/<classid>', methods=['POST'])
 async def addClass(classid):
@@ -115,7 +132,7 @@ async def addClass(classid):
             courses.append(course_obj)
         
         return render_template('student.html', user=user, time=time, courses=courses)
-    return res[1], 404
+    return f"<script>alert('{res[1]}');history.back();</script>"
 
 @app.route('/remove/<classid>', methods=['POST'])
 async def removeClass(classid):
@@ -149,14 +166,14 @@ async def removeClass(classid):
             courses.append(course_obj)
         
         return render_template('student.html', user=user, time=time, courses=courses)
-    return res[1], 404
+    return f"<script>alert('{res[1]}');history.back();</script>"
 
 @app.route('/details/<classid>', methods=['Post'])
 def details(classid):
     with open("Course.json", encoding='utf-8') as f:
         raw_courses = json.load(f)
     course = raw_courses[classid]
-    class_ = {"name": course["Name"], "info": []}
+    class_ = {"user": user['id'], "name": course["Name"], "info": []}
     class_["info"].append({ "key": "課程 ID", "value": classid })
     class_["info"].append({ "key": "學分", "value": course["Credit"]})
     class_["info"].append({ "key": "上課時間", "value": time["days"][course["Time"]["Week"] - 1] + " 第" + str(course["Time"]["Class"]) + "-" + str(course["Time"]["Class"] + course["Time"]["Duration"] - 1) + "節"})
@@ -165,6 +182,11 @@ def details(classid):
     class_["info"].append({ "key": "負責系辦", "value": course["Depart"]})
     class_["info"].append({ "key": "剩餘名額 / 總共名額", "value": str(course["Remaining"]) + " / " + str(course["Total peopl"])})
     return render_template("details.html", class_=class_)
+
+@app.route('/previous_page/<username>', methods=['POST'])
+def previous_page(username):
+    return redirect(url_for('user_profile', username=username))
+
 
 @app.route('/logout')
 def logout():

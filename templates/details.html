@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{class_.name}}課程內容</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
     <h1>課程：{{class_['name']}}</h1>
@@ -15,5 +16,8 @@
             </tr>
         {% endfor %}
     </table>
+    <form method="post" action="/previous_page/{{class_['user']}}">
+        <button type="submit" class="withdrawButton btn btn-warning">返回</button>
+    </form>
 </body>
 </html>

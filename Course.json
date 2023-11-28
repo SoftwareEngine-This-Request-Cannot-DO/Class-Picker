@@ -12,7 +12,7 @@
     },
 
     "A002" : {
-        "Name"          :   "程式設計",
+        "Name"          :   "程式設計(I)",
         "Credit"        :   2,
         "Total peopl"   :   50,
         "Remaining"     :   11,
@@ -32,6 +32,53 @@
             "Week"      :   1,
             "Class"     :   5,
             "Duration"  :   2   
+        }
+    },
+
+    "A004" : {
+        "Name"          :   "程式設計(II)",
+        "Credit"        :   3,
+        "Total peopl"   :   12,
+        "Remaining"     :   0,
+        "Time"          :   {
+            "Week"      :   1,
+            "Class"     :   1,
+            "Duration"  :   3   
+        }
+    },
+
+    "A005" : {
+        "Name"          :   "資料結構",
+        "Credit"        :   3,
+        "Total peopl"   :   30,
+        "Remaining"     :   5,
+        "Time"          :   {
+            "Week"      :   3,
+            "Class"     :   3,
+            "Duration"  :   3   
+        }
+    },
+
+    "A006" : {
+        "Name"          :   "軟體工程",
+        "Credit"        :   3,
+        "Total peopl"   :   42,
+        "Remaining"     :   7,
+        "Time"          :   {
+            "Week"      :   3,
+            "Class"     :   3,
+            "Duration"  :   2   
+        }
+    },
+    "A007" : {
+        "Name": "演算法",
+        "Credit": 3,
+        "Remaining": 2,
+        "Total peopl": 30,
+        "Time":{
+            "Week": 3,
+            "Class": 2,
+            "Duration": 3
         }
     }
 }

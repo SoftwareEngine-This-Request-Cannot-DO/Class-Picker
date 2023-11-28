@@ -1,0 +1,27 @@
+{
+  "D1234567": {
+    "password": "password1",
+    "name": "\u7528\u6237\u4e00",
+    "role": "Student",
+    "id": "D1234567",
+    "credit": 13,
+    "classes": [
+      "A001",
+      "A002",
+      "A003",
+      "A004",
+      "A005"
+    ]
+  },
+  "D1111111": {
+    "password": "password2",
+    "name": "\u7528\u6237\u4e8c",
+    "role": "Student",
+    "id": "D1234567",
+    "credit": 5,
+    "classes": [
+      "A001",
+      "A002"
+    ]
+  }
+}

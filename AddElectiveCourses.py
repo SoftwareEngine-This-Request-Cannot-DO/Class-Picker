@@ -5,16 +5,16 @@ import json
 def read_json_file(filename):
     data = {}
     try:
-        with open(filename, 'r') as f:
+        with open(filename, 'r', encoding='utf-8') as f:
             data = json.load(f)
         return data
     except FileNotFoundError:
         print("ERROR: 找不到 " + filename + " 檔案。")
         return None
 
-def write_json_file(filename, new_data):
+async def write_json_file(filename, new_data):
     try:
-        with open(filename, 'w') as f:
+        with open(filename, 'w', encoding='utf-8') as f:
             json.dump(new_data, f, indent = 2)
         return True
     except FileNotFoundError:
@@ -31,32 +31,31 @@ def search_course(course_id):
     else:
         return None
 
-def write_curriculum(student_id, course_id):
-    filename = student_id + ".json"
+async def write_curriculum(student_id, course_id):
+    filename = "student.json"
+    data = read_json_file(filename)
+    course_info = read_json_file("Course.json")
 
     try:
-        if (verify(student_id, course_id)):
-            with open(filename, 'r') as f:
-                data = json.load(f)
+        # 確認學分
+        if int(data[student_id]['credit']) + int(course_info[course_id]["Credit"]) > 30:  
+            return [False, "超過學分上限"]
 
-            new_key = len(data) + 1
-            if new_key < 10:
-                new_key = "0" + str(new_key)
-            else:
-                new_key = str(new_key)
+        # 確認衝堂
+        if (not verify(student_id, course_id)):
+            return [False, "衝堂"]
+        
+        data[student_id]["classes"].append(course_id)
+        data[student_id]['credit'] += course_info[course_id]["Credit"]
+        await write_json_file(filename, data)
 
-            data[new_key] = {
-                "Course_ID" : course_id
-            }
-            write_json_file(filename, data)
-            return True
     except FileNotFoundError:
-        print("ERROR: " + student_id +"檔案不存在")
-        return False
+        print("ERROR: " + filename +"檔案不存在")
+    return [True]
 
 # 核實是否衝堂
 def verify(student_id, course_id):
-    filename = student_id + ".json"
+    filename = "student.json"
     curriculum = read_json_file(filename)
     course_info = read_json_file("Course.json")
 
@@ -67,57 +66,47 @@ def verify(student_id, course_id):
         course_time = course_info[course_id]["Time"]
     else:
         return False
-    time1 = []
-    for key, data in curriculum.items():
-        arr = search_course(data["Course_ID"])
-        if arr is None:
-            return False
-        time1.append(arr["Time"]["Week"])
-        time1.append(arr["Time"]["Class"])
-        time1.append(arr["Time"]["Duration"])
 
-    time2 = []
-    time2.append(course_time["Week"])
-    time2.append(course_time["Class"])
-    time2.append(course_time["Duration"])
+    my_time = []
+    for other_course_id in curriculum[student_id]["classes"]:
+        # Week, Class, Duration
+        my_time.append(course_info[other_course_id]["Time"])
 
-    if time1[0] == time2[0]:
-        if is_duplicate(time1, time2) == True:
+    for time in my_time:
+        if is_duplicate(course_time, time):
             return False
-        else:
-            return True
-    else:
-        return True
+
+    return True
 
 # 是否重複
-def is_duplicate(time1, time2):
+def is_duplicate(course_time, my_time):
+    if course_time["Week"] != my_time["Week"]: return False
+
     times = 0
-    arr1 = generate_value(time1)
-    arr2 = generate_value(time2)
+    course_time_array = generate_value(course_time)
+    my_time_arry = generate_value(my_time)
     
-    for v1 in arr1:
-        if v1 in arr2:
-            times += 1
-    if times == 0:
-        return False
-    else:
-        return True
+    for v1 in course_time_array:
+        if v1 in my_time_arry:
+            return True
+    return False
 
 # 生成計算值
-def generate_value(arr):
+def generate_value(time):
     value = []
-    min_ = arr[1]
-    max_ = min_ + arr[2]
+    min_ = time["Class"]
+    max_ = min_ + time["Duration"]
     for i in range(min_, max_):
         value.append(i)
     return value
 
 # testing only
-course = read_json_file("Course.json")
-student_id = "F001"
-class_id = "B001"
-result = write_curriculum(student_id, class_id)
-if result:
-    print("Success")
-else:
-    print("Error")
+if __name__ == '__main__':
+    course = read_json_file("Course.json")
+    student_id = "F001"
+    class_id = "B001"
+    result = write_curriculum(student_id, class_id)
+    if result:
+        print("Success")
+    else:
+        print("Error")

@@ -3,19 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../assets/style.css">
-    <link rel="stylesheet" href="../assets/student.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>選課系統 - 學生</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/student.css') }}">
 </head>
 <body>
     <main>
         <div id="student-information">
+            <h1 id="title">FCU 選課系統</h1>
             <ul>
-                <li class="student-name">姓名：林ＸＸ</li>
-                <li>ID：D1234567</li>
+                <li class="student-name">姓名：{{user.name}}</li>
+                <li>ID：{{user.id}}</li>
+                <li>目前學分：{{user.credit}} / 30</li>
             </ul>
+            <button id="showButton" onclick="showMyClass()" type="button" class="btn btn-outline-primary">我的課程</button>
+            <button id="showButton" onclick="showOtherClass()" type="button" class="btn btn-outline-primary">其他課程</button>
+            <a href="{{ url_for('logout') }}" type="button" class="btn btn-outline-danger">登出</a>
         </div>
-        <div id="class-information"></div>
+        <div id="class-information">
+            <div class="tableFragment">
+                <table id="MyClass" style="display: none">
+                    <tr>
+                        <th>時間</th>
+                        {% for day in time.days %}
+                            <th>{{ day }}</th>
+                        {% endfor %}
+                    </tr>
+                    {% for class in time.class %}
+                        <tr>
+                            <th class="time">{{ class.time }}</th>
+                            {% for classinfo in class.content %}
+                                {% if classinfo != "NULL" %}
+                                    <th class="className">{{ classinfo["Name"] }}</th>
+                                {% else %}
+                                    <th class="className"></th>
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <div class="tableFragment">
+                <table id="AllClass" style="display: none;">
+                    <tr>
+                        <th>課程 ID</th>
+                        <th>課程名稱</th>
+                        <th>學分</th>
+                        <th>上課時間</th>
+                        <th>剩餘 / 總共</th>
+                        <th>加退選</th>
+                        <th>詳細資料</th>
+                    </tr>
+                    {% for course in courses %}
+                        <tr>
+                            
+                                <td>{{course['id']}}</td>
+                                <td>{{course['info']['Name']}}</td>
+                                <td>{{course['info']['Credit']}}</td>
+                                <td>{{course['info']['Time']['Week']}} 第{{course['info']['Time']['Class']}}-{{course['info']['Time']['Class']  + course['info']['Time']['Duration'] - 1}}節</td>
+                                <td>{{course['info']['Remaining']}} / {{course['info']['Total peopl']}}</td>
+                                {% if course['check'] %}
+                                    <td>
+                                        <form method="POST" action="/remove/{{ course['id'] }}">
+                                            <button type="submit" class="withdrawButton">退選</button>
+                                        </form>
+                                    </td>
+                                {% else %}
+                                    <td>
+                                        <form method="POST" action="/add/{{ course['id'] }}">
+                                            <button type="submit" class="withdrawButton">加選</button>
+                                        </form>
+                                    </td>
+                                {% endif %}
+                                <td><button class="withdrawButton">詳細資料</button></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
     </main>
 </body>
+
+<script>
+const table1 = document.querySelector("#MyClass");
+const table2 = document.querySelector("#AllClass");
+const showMyClass = function () {
+    // 切換表格的顯示狀態
+    if (table1.style.display === "none") {
+        table1.style.display = "table"; // 顯示表格
+    } else {
+        table1.style.display = "none"; // 隱藏表格
+    }
+}
+const showOtherClass = function () {
+    // 切換表格的顯示狀態
+    if (table2.style.display === "none") {
+        table2.style.display = "table"; // 顯示表格
+    } else {
+        table2.style.display = "none"; // 隱藏表格
+    }
+}
+
+function updateData(classid) {
+    var xhr = new XMLHttpRequest();
+
+    xhr.open('POST', `/add/${classid}`, true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var divElement = document.getElementById('data');
+            divElement.innerHTML = xhr.responseText;
+        }
+    };
+
+    xhr.send();
+}
+</script>
 </html>

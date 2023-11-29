@@ -4,12 +4,13 @@
     "name": "\u7528\u6237\u4e00",
     "role": "Student",
     "id": "D1234567",
-    "credit": 10,
+    "credit": 13,
     "classes": {
       "normal": [
         "0009",
+        "0008",
         "0001",
-        "0008"
+        "0003"
       ],
       "required": [
         "0006"
@@ -21,10 +22,11 @@
     "name": "\u7528\u6237\u4e8c",
     "role": "Student",
     "id": "D1111111",
-    "credit": 10,
+    "credit": 13,
     "classes": {
       "normal": [
-        "0015"
+        "0015",
+        "0003"
       ],
       "required": [
         "0002",
@@ -32,5 +34,16 @@
         "0010"
       ]
     }
+  },
+  "T1234567": {
+    "password": "qwerty",
+    "name": "\u738b\u5148\u751f",
+    "role": "Teacher",
+    "id": "T1234567",
+    "classes": [
+      "0003",
+      "0010",
+      "0017"
+    ]
   }
 }

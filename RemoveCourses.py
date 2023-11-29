@@ -43,6 +43,7 @@ def removeClass(student_id, course_id):
     students_data[student_id]["credit"] -= course_data[course_id]["Credit"]
     students_data[student_id]["classes"]["normal"].remove(course_id)
     course_data[course_id]["Remaining"] += 1
+    course_data[course_id]["Student List"].remove(students_data[student_id]['name'])
     write_json_file("student.json", students_data)
     write_json_file("course.json", course_data)
     return [True]

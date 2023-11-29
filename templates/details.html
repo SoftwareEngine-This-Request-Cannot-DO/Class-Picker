@@ -12,14 +12,27 @@
     <h1>課程：{{class_['name']}}</h1>
     <table>
         {% for info in class_['info'] %}
-            <tr>
-                <th class="key">{{info.key}}</th>
-                <th class="value">{{info.value}}</th>
-            </tr>
+            {% if info['key'] == "已加選學生名單" %}
+                <tr>
+                    <th class="key">{{info.key}}</th>
+                    <th class="value">{{"、".join(info.value)}}</th>
+                </tr>
+            {% else %}
+                <tr>
+                    <th class="key">{{info.key}}</th>
+                    <th class="value">{{info.value}}</th>
+                </tr>
+            {% endif %}
         {% endfor %}
     </table>
     <form method="post" action="/previous_page/{{class_['user']}}">
         <button type="submit" class="withdrawButton btn btn-warning">返回</button>
     </form>
 </body>
+<style>
+.key{
+    width: 200px;
+    text-align: center;
+}
+</style>
 </html>

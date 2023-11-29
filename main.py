@@ -75,7 +75,6 @@ def user_profile(username):
     if not islogin[0] or islogin[1] != username:
         return f"<script>alert('你想幹麻，滾開');history.back();</script>"
 
-    time = createTimeTable()
     # 個別用戶資料頁面
     with open("student.json", encoding='utf-8') as f:
         user = json.load(f).get(username)
@@ -83,34 +82,51 @@ def user_profile(username):
     with open("course.json", encoding='utf-8') as f:
         raw_courses = json.load(f)
 
-    credits = 0
-    for class_ in user["classes"]["normal"]:
-        credits += raw_courses[class_]["Credit"]
-        class_time = raw_courses[class_]["Time"]
-        for i in range(class_time["Duration"]):
-            time["class"][int(class_time["Class"]) - 1 + i]["content"][int(class_time["Week"]) - 1] = raw_courses[class_]
-        
-    for class_ in user["classes"]["required"]:
-        credits += raw_courses[class_]["Credit"]
-        class_time = raw_courses[class_]["Time"]
-        for i in range(class_time["Duration"]):
-            time["class"][int(class_time["Class"]) - 1 + i]["content"][int(class_time["Week"]) - 1] = raw_courses[class_]
-    user["credit"] = credits
+    time = createTimeTable()
+    # 身分為學生
+    if user["role"] == 'Student':
+        credits = 0
+        for class_ in user["classes"]["normal"]:
+            credits += raw_courses[class_]["Credit"]
+            class_time = raw_courses[class_]["Time"]
+            for i in range(class_time["Duration"]):
+                time["class"][int(class_time["Class"]) - 1 + i]["content"][int(class_time["Week"]) - 1] = raw_courses[class_]
+            
+        for class_ in user["classes"]["required"]:
+            credits += raw_courses[class_]["Credit"]
+            class_time = raw_courses[class_]["Time"]
+            for i in range(class_time["Duration"]):
+                time["class"][int(class_time["Class"]) - 1 + i]["content"][int(class_time["Week"]) - 1] = raw_courses[class_]
+        user["credit"] = credits
 
-    courses = []
-    copy_courses = copy.deepcopy(raw_courses)
-    for course_key, course_val in copy_courses.items():
-        course_val["Time"]["Week"] = time["days"][course_val["Time"]["Week"] - 1] 
-        course_obj = {
-            "id": course_key, 
-            "info": course_val, 
-            "check": course_key in user["classes"]["normal"] or course_key in user["classes"]["required"],
-            "required": course_key in user["classes"]["required"]
-        }
-        courses.append(course_obj)
+        courses = []
+        copy_courses = copy.deepcopy(raw_courses)
+        for course_key, course_val in copy_courses.items():
+            course_val["Time"]["Week"] = time["days"][course_val["Time"]["Week"] - 1] 
+            course_obj = {
+                "id": course_key, 
+                "info": course_val, 
+                "check": course_key in user["classes"]["normal"] or course_key in user["classes"]["required"],
+                "required": course_key in user["classes"]["required"]
+            }
+            courses.append(course_obj)
+    
+    # 該身分為教師
+    if user['role'] == 'Teacher':
+        courses = []
+        for course_id in user['classes']:
+            raw_courses[course_id]["Time"]["Week"] = time["days"][raw_courses[course_id]["Time"]["Week"] - 1] 
+            course_obj = {
+                "id": course_id,
+                "info": raw_courses[course_id]
+            }
+            courses.append(course_obj)
 
     if user:
-        return render_template('student.html', user=user, time=time, courses=courses)
+        if user['role'] == 'Student':
+            return render_template('student.html', user=user, time=time, courses=courses)
+        if user['role'] == 'Teacher':
+            return render_template('teacher.html', user=user, courses=courses)
     else:
         return f"<script>alert('該用戶不存在');history.back();</script>"
     
@@ -141,8 +157,17 @@ def details(classid):
     class_["info"].append({ "key": "上課時間", "value": time["days"][course["Time"]["Week"] - 1] + " 第" + str(course["Time"]["Class"]) + "-" + str(course["Time"]["Class"] + course["Time"]["Duration"] - 1) + "節"})
     class_["info"].append({ "key": "上課地點", "value": course["Place"]})
     class_["info"].append({ "key": "指導教師", "value": course["Teacher"]})
-    class_["info"].append({ "key": "負責系辦", "value": course["Depart"]})
-    class_["info"].append({ "key": "剩餘名額 / 總共名額", "value": str(course["Remaining"]) + " / " + str(course["Total peopl"])})
+    class_["info"].append({ "key": "開辦系辦", "value": course["Depart"]})
+    if user['role'] == 'Student':
+        class_["info"].append({ "key": "剩餘名額 / 總共名額", "value": str(course["Remaining"]) + " / " + str(course["Total peopl"])})
+    if user['role'] == 'Teacher':
+        last = course["Total peopl"] - course["Remaining"] - len(course["Student List"])
+        for i in range(last):
+            course["Student List"].append(f"學生 {i + 1}")
+        class_["info"].append({"key": "已加選人數 / 總共名額", "value": str(course["Total peopl"] - course["Remaining"]) + " / " + str(course["Total peopl"])})
+        class_["info"].append({"key": "已加選學生名單", "value": course["Student List"]})
+
+    class_["info"].append({ "key": "課程內容", "value": course["Content"]})
     return render_template("details.html", class_=class_)
 
 @app.route('/previous_page/<username>', methods=['POST'])

@@ -55,6 +55,7 @@ def write_curriculum(student_id, course_id):
         data[student_id]["classes"]["normal"].append(course_id)
         data[student_id]['credit'] += course_info[course_id]["Credit"]
         course_info[course_id]["Remaining"] -= 1
+        course_info[course_id]["Student List"].append(data[student_id]['name'])
         write_json_file("student.json", data)
         write_json_file("course.json", course_info)
 

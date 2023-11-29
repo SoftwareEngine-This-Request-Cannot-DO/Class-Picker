@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../static/icon.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <title>選課系統 - 學生</title>
+    <title>選課系統 - 教師</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/student.css') }}">
 </head>
@@ -21,7 +21,6 @@
             </ul>
             <button id="showButton2" onclick="showOtherClass()" type="button" class="btn btn-outline-primary active">我的課程</button>
             <a href="{{ url_for('logout') }}" type="button" class="btn btn-outline-danger">登出</a>
-            <div><small style="color:red; font-weight: bold;">紅字為必修</small></div>
         </div>
         <div id="class-information">
             <div class="tableFragment">
@@ -46,19 +45,6 @@
                             <td>{{course['info']['Credit']}}</td>
                             <td>{{course['info']['Time']['Week']}} 第{{course['info']['Time']['Class']}}-{{course['info']['Time']['Class']  + course['info']['Time']['Duration'] - 1}}節</td>
                             <td>{{course['info']['Remaining']}} / {{course['info']['Total peopl']}}</td>
-                            {% if course['check'] %}
-                                <td>
-                                    <form method="POST" action="/remove/{{ course['id'] }}">
-                                        <button type="submit" class="withdrawButton btn btn-warning">退選</button>
-                                    </form>
-                                </td>
-                            {% else %}
-                                <td>
-                                    <form method="POST" action="/add/{{ course['id'] }}">
-                                        <button type="submit" class="withdrawButton btn btn-success">加選</button>
-                                    </form>
-                                </td>
-                            {% endif %}
                             <td>
                                 <form method="POST" action="/details/{{ course['id'] }}">
                                     <button type="submit" class="withdrawButton btn btn-info">檢視課程</button>

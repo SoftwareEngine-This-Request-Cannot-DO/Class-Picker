@@ -4,13 +4,12 @@
     "name": "\u7528\u6237\u4e00",
     "role": "Student",
     "id": "D1234567",
-    "credit": 13,
+    "credit": 10,
     "classes": {
       "normal": [
         "0009",
         "0008",
-        "0001",
-        "0003"
+        "0001"
       ],
       "required": [
         "0006"

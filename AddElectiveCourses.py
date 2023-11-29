@@ -41,8 +41,13 @@ def write_curriculum(student_id, course_id):
             return [False, "沒有剩餘名額"]
 
         wrong_msg = ""
+
+        # 確認是否課程名稱重複
+        if is_same_course(student_id, course_id):
+            wrong_msg += "課程名稱不能重複, "
+
         # 確認學分與衝堂
-        if int(data[student_id]['credit']) + int(course_info[course_id]["Credit"]) > 20:
+        if is_over_credit(student_id, course_id):
             wrong_msg += "超過學分上限, "
 
         # 確認衝堂
@@ -104,6 +109,32 @@ def is_duplicate(course_time, my_time):
         if v1 in my_time_arry:
             return True
     return False
+
+# 是否課程名稱相同
+def is_same_course(student_id, course_id):
+    student_data = read_json_file("student.json")
+    course_data = read_json_file("course.json")
+    curriculum = student_data[student_id]['classes']['normal'] + student_data[student_id]['classes']['required']
+    for index, id in enumerate(curriculum):
+        curriculum[index] = course_data[id]["Name"]
+    course_name = course_data[course_id]["Name"]
+    if course_name in curriculum:
+        return True
+    else:
+        return False
+
+# 是否超過學分
+def is_over_credit(student_id, course_id):
+    student_data = read_json_file("student.json")
+    course_data = read_json_file("course.json")
+    student_credit = student_data[student_id]["credit"]
+    course_credit = course_data[course_id]["Credit"]
+
+    max_credit = 20
+    if student_credit + course_credit > max_credit:
+        return True
+    else:
+        return False
 
 # 生成計算值
 def generate_value(time):

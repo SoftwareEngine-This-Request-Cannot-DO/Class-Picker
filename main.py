@@ -159,12 +159,12 @@ def details(classid):
     class_["info"].append({ "key": "指導教師", "value": course["Teacher"]})
     class_["info"].append({ "key": "開辦系辦", "value": course["Depart"]})
     if user['role'] == 'Student':
-        class_["info"].append({ "key": "剩餘名額 / 總共名額", "value": str(course["Remaining"]) + " / " + str(course["Total peopl"])})
+        class_["info"].append({ "key": "剩餘名額 / 開放人數", "value": str(course["Remaining"]) + " / " + str(course["Total peopl"])})
     if user['role'] == 'Teacher':
         last = course["Total peopl"] - course["Remaining"] - len(course["Student List"])
         for i in range(last):
             course["Student List"].append(f"學生 {i + 1}")
-        class_["info"].append({"key": "已加選人數 / 總共名額", "value": str(course["Total peopl"] - course["Remaining"]) + " / " + str(course["Total peopl"])})
+        class_["info"].append({"key": "已加選人數 / 開放人數", "value": str(course["Total peopl"] - course["Remaining"]) + " / " + str(course["Total peopl"])})
         class_["info"].append({"key": "已加選學生名單", "value": course["Student List"]})
 
     class_["info"].append({ "key": "課程內容", "value": course["Content"]})

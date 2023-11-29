@@ -1,21 +1,18 @@
 {
   "D1234567": {
-    "password": "password1",
+    "password": "qwerty",
     "name": "\u7528\u6237\u4e00",
     "role": "Student",
     "id": "D1234567",
-    "credit": 16,
+    "credit": 10,
     "classes": {
       "normal": [
-        "A005",
-        "A12",
-        "A15",
-        "A11"
+        "0009",
+        "0001",
+        "0008"
       ],
       "required": [
-        "A001",
-        "A002",
-        "A003"
+        "0006"
       ]
     }
   },
@@ -24,21 +21,15 @@
     "name": "\u7528\u6237\u4e8c",
     "role": "Student",
     "id": "D1111111",
-    "credit": 21,
+    "credit": 10,
     "classes": {
       "normal": [
-        "A11",
-        "A008",
-        "A12",
-        "A14",
-        "A15",
-        "A004",
-        "A003"
+        "0015"
       ],
       "required": [
-        "A001",
-        "A002",
-        "A007"
+        "0002",
+        "0007",
+        "0010"
       ]
     }
   }

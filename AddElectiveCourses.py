@@ -40,13 +40,17 @@ def write_curriculum(student_id, course_id):
         if course_info[course_id]["Remaining"] == 0:
             return [False, "沒有剩餘名額"]
 
-        # 確認學分
-        if int(data[student_id]['credit']) + int(course_info[course_id]["Credit"]) > 30:  
-            return [False, "超過學分上限"]
+        wrong_msg = ""
+        # 確認學分與衝堂
+        if int(data[student_id]['credit']) + int(course_info[course_id]["Credit"]) > 20:
+            wrong_msg += "超過學分上限, "
 
         # 確認衝堂
         if (not verify(student_id, course_id)):
-            return [False, "衝堂"]
+            wrong_msg += "衝堂, "
+        
+        if len(wrong_msg) > 0:
+            return [False, wrong_msg[:-2]]
         
         data[student_id]["classes"]["normal"].append(course_id)
         data[student_id]['credit'] += course_info[course_id]["Credit"]

@@ -26,13 +26,19 @@ def removeClass(student_id, course_id):
     students_data = read_json_file("student.json")
     course_data = read_json_file("course.json")
 
+    wrong_msg = ""
     # 確認必修
     if course_id in students_data[student_id]["classes"]["required"]:
-        return [False, "不能退必修"]
+        wrong_msg += "不能退必修, "
 
     # 確認學分
     if students_data[student_id]["credit"] - course_data[course_id]["Credit"] < 10:
-        return [False, "低於學分下限"]
+        wrong_msg += "低於學分下限, "
+    
+
+    if len(wrong_msg) > 0:
+        wrong_msg = wrong_msg[:-2]
+        return [False, wrong_msg]
     
     students_data[student_id]["credit"] -= course_data[course_id]["Credit"]
     students_data[student_id]["classes"]["normal"].remove(course_id)

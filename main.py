@@ -83,14 +83,19 @@ def user_profile(username):
     with open("course.json", encoding='utf-8') as f:
         raw_courses = json.load(f)
 
+    credits = 0
     for class_ in user["classes"]["normal"]:
+        credits += raw_courses[class_]["Credit"]
         class_time = raw_courses[class_]["Time"]
         for i in range(class_time["Duration"]):
             time["class"][int(class_time["Class"]) - 1 + i]["content"][int(class_time["Week"]) - 1] = raw_courses[class_]
+        
     for class_ in user["classes"]["required"]:
+        credits += raw_courses[class_]["Credit"]
         class_time = raw_courses[class_]["Time"]
         for i in range(class_time["Duration"]):
             time["class"][int(class_time["Class"]) - 1 + i]["content"][int(class_time["Week"]) - 1] = raw_courses[class_]
+    user["credit"] = credits
 
     courses = []
     copy_courses = copy.deepcopy(raw_courses)

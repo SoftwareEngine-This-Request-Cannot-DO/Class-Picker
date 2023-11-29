@@ -18,37 +18,12 @@
                 <li class="student-name">姓名：{{user.name}}</li>
                 <li>ID：{{user.id}}</li>
                 <li>身分：{{user.role}}</li>
-                <li>目前學分：{{user.credit}} / 20</li>
-                <li>學分下限：10</li>
             </ul>
-            <button id="showButton1" onclick="showMyClass()" type="button" class="btn btn-outline-primary active">我的課程</button>
-            <button id="showButton2" onclick="showOtherClass()" type="button" class="btn btn-outline-primary active">全部課程</button>
+            <button id="showButton2" onclick="showOtherClass()" type="button" class="btn btn-outline-primary active">我的課程</button>
             <a href="{{ url_for('logout') }}" type="button" class="btn btn-outline-danger">登出</a>
             <div><small style="color:red; font-weight: bold;">紅字為必修</small></div>
         </div>
         <div id="class-information">
-            <div class="tableFragment">
-                <table id="MyClass" style="display: table">
-                    <tr>
-                        <th>時間</th>
-                        {% for day in time.days %}
-                            <th>{{ day }}</th>
-                        {% endfor %}
-                    </tr>
-                    {% for class in time.class %}
-                        <tr>
-                            <th class="time">{{ class.time }}</th>
-                            {% for classinfo in class.content %}
-                                {% if classinfo != "NULL" %}
-                                    <th class="className">{{ classinfo["Name"] }}</th>
-                                {% else %}
-                                    <th class="className"></th>
-                                {% endif %}
-                            {% endfor %}
-                        </tr>
-                    {% endfor %}
-                </table>
-            </div>
             <div class="tableFragment">
                 <table id="AllClass" style="display: table;">
                     <tr>
@@ -57,7 +32,6 @@
                         <th>學分</th>
                         <th>上課時間</th>
                         <th>剩餘 / 總共</th>
-                        <th>加退選</th>
                         <th>詳細資料</th>
                     </tr>
                     {% for course in courses %}
@@ -101,18 +75,7 @@
 <script>
 const table1 = document.querySelector("#MyClass");
 const table2 = document.querySelector("#AllClass");
-const button1 = document.querySelector("#showButton1")
 const button2 = document.querySelector("#showButton2")
-const showMyClass = function () {
-    // 切換表格的顯示狀態
-    if (table1.style.display === "none") {
-        button1.classList.add('active')
-        table1.style.display = "table"; // 顯示表格
-    } else {
-        button1.classList.remove('active')
-        table1.style.display = "none"; // 隱藏表格
-    }
-}
 const showOtherClass = function () {
     // 切換表格的顯示狀態
     if (table2.style.display === "none") {

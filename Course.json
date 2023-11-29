@@ -1,19 +1,19 @@
 {
-  "A001": {
-    "Name": "\u8edf\u9ad4\u5de5\u7a0b\u958b\u767c\u5be6\u52d9",
-    "Credit": 3,
-    "Total peopl": 60,
-    "Remaining": 40,
-    "Place": "\u8cc7\u96fb 234",
-    "Teacher": "\u738b\u5148\u751f",
-    "Depart": "\u8cc7\u96fb\u5b78\u9662",
+  "0001": {
+    "Name": "\u570b\u8a9e",
+    "Credit": 2,
+    "Total peopl": 40,
+    "Remaining": 5,
+    "Place": "\u8a9e\u6587 106",
+    "Teacher": "\u6797\u5c0f\u59d0",
+    "Depart": "\u6587\u5b78\u9662",
     "Time": {
-      "Week": 3,
-      "Class": 6,
-      "Duration": 3
+      "Week": 1,
+      "Class": 5,
+      "Duration": 2
     }
   },
-  "A002": {
+  "0002": {
     "Name": "\u7a0b\u5f0f\u8a2d\u8a08(I)",
     "Credit": 2,
     "Total peopl": 50,
@@ -27,35 +27,35 @@
       "Duration": 2
     }
   },
-  "A003": {
-    "Name": "\u570b\u8a9e",
-    "Credit": 2,
-    "Total peopl": 40,
-    "Remaining": 0,
-    "Place": "\u8a9e\u6587 106",
-    "Teacher": "\u6797\u5c0f\u59d0",
-    "Depart": "\u6587\u5b78\u9662",
-    "Time": {
-      "Week": 1,
-      "Class": 5,
-      "Duration": 2
-    }
-  },
-  "A004": {
-    "Name": "\u7a0b\u5f0f\u8a2d\u8a08(II)",
+  "0003": {
+    "Name": "\u8edf\u9ad4\u5de5\u7a0b\u958b\u767c\u5be6\u52d9",
     "Credit": 3,
-    "Total peopl": 12,
-    "Remaining": 0,
-    "Place": "\u8cc7\u96fb 210",
-    "Teacher": "\u9673\u5148\u751f",
+    "Total peopl": 60,
+    "Remaining": 39,
+    "Place": "\u8cc7\u96fb 234",
+    "Teacher": "\u738b\u5148\u751f",
     "Depart": "\u8cc7\u96fb\u5b78\u9662",
     "Time": {
-      "Week": 1,
-      "Class": 1,
+      "Week": 3,
+      "Class": 6,
       "Duration": 3
     }
   },
-  "A005": {
+  "0004": {
+    "Name": "\u897f\u73ed\u7259\u8a9e(I)",
+    "Credit": 2,
+    "Remaining": 1,
+    "Total peopl": 38,
+    "Place": "\u4eba\u8a00 501",
+    "Teacher": "Lee",
+    "Depart": "\u6587\u5b78\u9662",
+    "Time": {
+      "Week": 2,
+      "Class": 1,
+      "Duration": 2
+    }
+  },
+  "0005": {
     "Name": "\u8cc7\u6599\u7d50\u69cb",
     "Credit": 3,
     "Total peopl": 30,
@@ -69,27 +69,13 @@
       "Duration": 3
     }
   },
-  "A006": {
+  "0006": {
     "Name": "\u8edf\u9ad4\u5de5\u7a0b",
     "Credit": 3,
     "Total peopl": 42,
-    "Remaining": 8,
+    "Remaining": 7,
     "Place": "\u5de5\u5b78 210",
     "Teacher": "\u5b6b\u5148\u751f",
-    "Depart": "\u8cc7\u96fb\u5b78\u9662",
-    "Time": {
-      "Week": 3,
-      "Class": 3,
-      "Duration": 2
-    }
-  },
-  "A007": {
-    "Name": "\u6f14\u7b97\u6cd5",
-    "Credit": 3,
-    "Remaining": 2,
-    "Total peopl": 30,
-    "Place": "\u8cc7\u96fb 103",
-    "Teacher": "\u7d00\u5148\u751f",
     "Depart": "\u8cc7\u96fb\u5b78\u9662",
     "Time": {
       "Week": 3,
@@ -97,10 +83,24 @@
       "Duration": 3
     }
   },
-  "A008": {
+  "0007": {
+    "Name": "\u6f14\u7b97\u6cd5",
+    "Credit": 2,
+    "Remaining": 2,
+    "Total peopl": 30,
+    "Place": "\u8cc7\u96fb 103",
+    "Teacher": "\u7d00\u5148\u751f",
+    "Depart": "\u8cc7\u96fb\u5b78\u9662",
+    "Time": {
+      "Week": 2,
+      "Class": 3,
+      "Duration": 2
+    }
+  },
+  "0008": {
     "Name": "\u6295\u8cc7\u5b78",
     "Credit": 2,
-    "Remaining": 8,
+    "Remaining": 7,
     "Total peopl": 40,
     "Place": "\u5546\u5b78 103",
     "Teacher": "\u9ec3\u5973\u58eb",
@@ -111,24 +111,24 @@
       "Duration": 2
     }
   },
-  "A009": {
-    "Name": "\u6d41\u9ad4\u529b\u5b78",
-    "Credit": 2,
-    "Remaining": 1,
-    "Total peopl": 30,
-    "Place": "\u822a\u592a 303",
-    "Teacher": "\u738b\u8001\u5e2b",
-    "Depart": "\u5de5\u7a0b\u5b78\u9662",
+  "0009": {
+    "Name": "\u8a08\u7b97\u6a5f\u6982\u8ad6",
+    "Credit": 3,
+    "Remaining": 5,
+    "Total peopl": 50,
+    "Place": "\u8cc7\u96fb 103",
+    "Teacher": "\u6e38\u8001\u5e2b",
+    "Depart": "\u8cc7\u96fb\u5b78\u9662",
     "Time": {
-      "Week": 1,
-      "Class": 8,
-      "Duration": 2
+      "Week": 2,
+      "Class": 6,
+      "Duration": 3
     }
   },
-  "A11": {
+  "0010": {
     "Name": "\u91cf\u5b50\u529b\u5b78",
-    "Credit": 2,
-    "Remaining": 8,
+    "Credit": 3,
+    "Remaining": 7,
     "Total peopl": 50,
     "Place": "\u5de5\u5b78\u9662 105",
     "Teacher": "\u738b\u8001\u5e2b",
@@ -136,38 +136,38 @@
     "Time": {
       "Week": 4,
       "Class": 1,
-      "Duration": 2
+      "Duration": 3
     }
   },
-  "A12": {
-    "Name": "\u897f\u73ed\u7259\u8a9e(I)",
-    "Credit": 2,
+  "0011": {
+    "Name": "\u7a0b\u5f0f\u8a2d\u8a08(II)",
+    "Credit": 3,
+    "Total peopl": 12,
     "Remaining": 0,
-    "Total peopl": 38,
-    "Place": "\u4eba\u8a00 501",
-    "Teacher": "Lee",
-    "Depart": "\u6587\u5b78\u9662",
-    "Time": {
-      "Week": 2,
-      "Class": 1,
-      "Duration": 2
-    }
-  },
-  "A13": {
-    "Name": "\u8a08\u7b97\u6a5f\u6982\u8ad6",
-    "Credit": 2,
-    "Remaining": 5,
-    "Total peopl": 50,
-    "Place": "\u8cc7\u96fb 103",
-    "Teacher": "\u6e38\u8001\u5e2b",
+    "Place": "\u8cc7\u96fb 210",
+    "Teacher": "\u9673\u5148\u751f",
     "Depart": "\u8cc7\u96fb\u5b78\u9662",
     "Time": {
-      "Week": 3,
+      "Week": 1,
       "Class": 1,
-      "Duration": 2
+      "Duration": 3
     }
   },
-  "A14": {
+  "0012": {
+    "Name": "\u6d41\u9ad4\u529b\u5b78",
+    "Credit": 3,
+    "Remaining": 7,
+    "Total peopl": 30,
+    "Place": "\u822a\u592a 303",
+    "Teacher": "\u738b\u8001\u5e2b",
+    "Depart": "\u5de5\u7a0b\u5b78\u9662",
+    "Time": {
+      "Week": 1,
+      "Class": 7,
+      "Duration": 3
+    }
+  },
+  "0013": {
     "Name": "\u7db2\u8def\u901a\u8a0a\u8207\u6982\u8ad6)",
     "Credit": 3,
     "Remaining": 7,
@@ -181,10 +181,10 @@
       "Duration": 3
     }
   },
-  "A15": {
+  "0014": {
     "Name": "\u97f3\u6a02\u8cde\u6790",
     "Credit": 2,
-    "Remaining": 0,
+    "Remaining": 2,
     "Total peopl": 50,
     "Place": "\u4eba\u8a00 304",
     "Teacher": "\u9ec3\u8001\u5e2b",
@@ -192,6 +192,34 @@
     "Time": {
       "Week": 5,
       "Class": 6,
+      "Duration": 2
+    }
+  },
+  "0015": {
+    "Name": "\u8cc7\u8a0a\u8207\u7db2\u8def\u5b89\u5168",
+    "Credit": 3,
+    "Remaining": 1,
+    "Total peopl": 50,
+    "Place": "\u8cc7\u96fb 104",
+    "Teacher": "Jack Chen",
+    "Depart": "\u8cc7\u96fb\u5b78\u9662",
+    "Time": {
+      "Week": 4,
+      "Class": 11,
+      "Duration": 3
+    }
+  },
+  "0016": {
+    "Name": "\u7fbd\u7403",
+    "Credit": 2,
+    "Remaining": 11,
+    "Total peopl": 30,
+    "Place": "\u64cd\u5834",
+    "Teacher": "\u76e7\u8001\u5e2b",
+    "Depart": "\u9ad4\u80b2\u7f72",
+    "Time": {
+      "Week": 5,
+      "Class": 8,
       "Duration": 2
     }
   }
